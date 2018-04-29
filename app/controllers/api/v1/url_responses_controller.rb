@@ -4,7 +4,7 @@ module Api::V1
     before_action :fetch_site_content, only: [:create]
 
     def index
-      @url_responses = UrlResponse.all
+      @url_responses = UrlResponse.page(params[:page])
       render json: json_resources(UrlResponseResource, @url_responses), status: :ok
     end
 
