@@ -22,8 +22,7 @@ class UrlParser
       doc = Nokogiri::HTML(open(url))
       parse_content(doc)
     rescue => e
-      @success = false
-      @response = {error: e}
+      handle_failure(e)
     end
     self
   end
@@ -62,5 +61,11 @@ class UrlParser
 
   def parse_anchors(doc)
     @anchors = doc.xpath('//a').collect { |h3| h3['href'] }
+  end
+
+  def handle_failure(exception)
+    @success = false
+    # Note Update response as per requirement
+    @response = { error: exception }
   end
 end
