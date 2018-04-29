@@ -10,10 +10,10 @@ module Api::V1
 
     def create
       @url_response = @url_parser.create_response
-      if @url_response
+      if @url_response.valid?
         render json: json_resource(UrlResponseResource, @url_response), status: :created
       else
-        render json: json_resource(UrlResponseResource, @url_response.errors), status: :unprocessable_entity
+        render json: :no_content, status: :unprocessable_entity
       end
     end
 
