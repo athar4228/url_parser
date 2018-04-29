@@ -19,6 +19,7 @@ module Api::V1
 
     private
 
+    #Note: In future moved this process to work asynchronously and return message that the process is queued
     def fetch_site_content
       @url_parser = UrlParser.new(params[:url])
       if @url_parser.failed?
